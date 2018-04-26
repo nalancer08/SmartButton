@@ -78,6 +78,46 @@ public class SmartButton extends AppCompatButton {
         }
     }
 
+    public int getTintColor() {
+
+        return tintColor;
+    }
+
+    public void setTintColor(int tintColor) {
+
+        this.tintColor = tintColor;
+    }
+
+    public float getmBorderRadius() {
+
+        return mBorderRadius;
+    }
+
+    public void setmBorderRadius(float mBorderRadius) {
+
+        this.mBorderRadius = mBorderRadius;
+    }
+
+    public int getmStrokeColor() {
+
+        return mStrokeColor;
+    }
+
+    public void setmStrokeColor(int mStrokeColor) {
+
+        this.mStrokeColor = mStrokeColor;
+    }
+
+    public int getmStrokeWidth() {
+
+        return mStrokeWidth;
+    }
+
+    public void setmStrokeWidth(int mStrokeWidth) {
+
+        this.mStrokeWidth = mStrokeWidth;
+    }
+
     private void update() {
 
         // -- If the drawable has color we can change it
