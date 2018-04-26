@@ -5,7 +5,10 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.text.method.TransformationMethod;
@@ -30,6 +33,9 @@ public class SmartButton extends AppCompatButton {
     private int tintColor = Color.TRANSPARENT;
     private int mLeftPadding;
     private int mRightPadding;
+    private float mBorderRadius = 0;
+    private int mStrokeColor = Color.TRANSPARENT;
+    private int mStrokeWidth = 0;
 
     public SmartButton(Context context) {
 
@@ -54,17 +60,31 @@ public class SmartButton extends AppCompatButton {
         if (attrs != null) {
 
             TypedArray typedArray = context.obtainStyledAttributes(attrs, R.styleable.SmartButton);
+
             this.tintColor = typedArray.getColor(R.styleable.SmartButton_drawableTint, Color.TRANSPARENT);
+            this.mBorderRadius = typedArray.getFloat(R.styleable.SmartButton_borderRadius, 0);
+            this.mStrokeColor = typedArray.getColor(R.styleable.SmartButton_strokeColor, Color.TRANSPARENT);
+            this.mStrokeWidth = typedArray.getInteger(R.styleable.SmartButton_strokeWidth, 0);
+
             float defaultDrawablePadding = getResources().getDimension(R.dimen.smartbutton_drawable_padding);
             int drawablePadding = (int) typedArray.getDimension(R.styleable.SmartButton_android_drawablePadding, defaultDrawablePadding);
             setCompoundDrawablePadding(drawablePadding);
 
-            // -- If the drawable has color we can change it
-            this.updateTint();
+            // -- Update factory
+            this.update();
 
             // -- Recycle the typed array
             typedArray.recycle();
         }
+    }
+
+    private void update() {
+
+        // -- If the drawable has color we can change it
+        this.updateTint();
+
+        // -- Change border
+        this.updateBorderRadius();
     }
 
     private void updateTint() {
@@ -89,6 +109,33 @@ public class SmartButton extends AppCompatButton {
                                                             wrappedDrawables[DRAWABLE_TOP_POSITION],
                                                             wrappedDrawables[DRAWABLE_RIGHT_POSITION],
                                                             wrappedDrawables[DRAWABLE_BOTTOM_POSITION]);
+        }
+    }
+
+    private void updateBorderRadius() {
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN && this.mBorderRadius > 0) {
+
+            // Initialize a new GradientDrawable
+            GradientDrawable gd = new GradientDrawable();
+
+            // Specify the shape of drawable
+            gd.setShape(GradientDrawable.RECTANGLE);
+
+            // Set the fill color of drawable
+            ColorDrawable color = (ColorDrawable) getBackground();
+            gd.setColor(color.getColor()); // Getting current color
+
+            if (this.mStrokeColor != Color.TRANSPARENT && this.mStrokeWidth > 0) {
+                // Create a 2 pixels width red colored border for drawable
+                gd.setStroke(this.mStrokeWidth, this.mStrokeColor); // border width and color
+            }
+
+            // Make the border rounded
+            gd.setCornerRadius(this.mBorderRadius); // border corner radius
+
+            // Finally, apply the GradientDrawable as TextView background
+            setBackground(gd);
         }
     }
 

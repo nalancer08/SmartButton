@@ -4,6 +4,9 @@
     <declare-styleable name="SmartButton">
         <attr name="drawableTint" format="color"/>
         <attr name="android:drawablePadding"/>
+        <attr name="borderRadius" format="float"/>
+        <attr name="strokeColor" format="color"/>
+        <attr name="strokeWidth" format="integer"/>
     </declare-styleable>
 
 </resources>

@@ -6,4 +6,33 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <com.appbuilders.smartbutton.SmartButton
+        android:id="@+id/test"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_centerInParent="true"
+        android:background="@color/fb"
+        android:textColor="@color/white"
+        android:text="Inicia sesion con facebook"
+        app:drawableTint="@color/white"
+        android:textSize="12sp"
+        app:borderRadius="20"
+        app:strokeWidth="3"
+        app:strokeColor="@color/colorAccent"
+        android:drawableLeft="@drawable/fb_logo_small"
+        android:drawablePadding="0dp"/>
+
+    <Button
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/test"
+        android:layout_marginTop="20dp"
+        android:textSize="12sp"
+        android:layout_centerInParent="true"
+        android:background="@color/fb"
+        android:textColor="@color/white"
+        android:text="Inicia sesion con facebook"
+        android:drawableLeft="@drawable/fb_logo_small"
+        android:drawablePadding="0dp"/>
+
 </RelativeLayout>
