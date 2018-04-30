@@ -34,6 +34,10 @@ Example of usage in xml layout
         android:drawablePadding="0dp"/>
 ```
 
+<p align="center">
+<img src="https://github.com/nalancer08/SmartButton/blob/master/Assests/xml_button.png">
+</p>
+
 Example of usage in Java
 
 ```
@@ -43,7 +47,43 @@ button.setBorderRadius(50);
 button.setStrokeColor(Color.GREEN);
 button.setStrokeWidth(5);
 button.setBackgroundColor(Color.RED);
+... normal button methods ...
 ```
+
+Example of usage combined XML and JAVA
+
+```
+<com.appbuilders.smartbutton.SmartButton
+android:id="@+id/programmatically_button"
+android:layout_width="240dp"
+android:layout_height="50dp"
+android:layout_below="@id/normal_button"
+android:layout_marginTop="20dp"
+android:layout_centerHorizontal="true"
+android:background="@color/fb"
+android:textColor="@color/white"
+android:text="Inicia sesion con facebook"
+android:textSize="12sp"
+android:drawableLeft="@drawable/fb_logo_small"
+android:drawablePadding="0dp"
+android:drawableStart="@drawable/fb_logo_small" />
+```
+
+And then into Activity ```onCreate``` method: 
+
+```
+SmartButton programmatically = findViewById(R.id.programmatically_button);
+programmatically.setTintColor(Color.CYAN);
+programmatically.setBorderRadius(50);
+programmatically.setStrokeColor(Color.GREEN);
+programmatically.setStrokeWidth(5);
+programmatically.setBackgroundColor(Color.RED);
+```
+
+<p align="center">
+<img src="https://github.com/nalancer08/SmartButton/blob/master/Assests/hybrid_button.png">
+</p>
+
 All the methods can be ommited, if you setted the background directly from xml.
 The only method that works diffrent as normal view its ```setBackgroundColor```,  so if you need to change the color only into the JAVa code, use this method.
 
