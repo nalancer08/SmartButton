@@ -1,16 +1,30 @@
 apply plugin: 'com.android.library'
 
+ext {
+    bintrayRepo = 'maven' // your repo name
+    bintrayName = 'smartbutton' // has to be same as your library module name
+    publishedGroupId = 'com.appbuilders.smartbutton' // your module package name
+    libraryName = 'SmartButton'
+    artifact = 'smartbutton' // has to be same as your library module name
+    libraryDescription = 'A button to handle smart radius'
+    siteUrl = 'https://github.com/nalancer08/SmartButton'
+    gitUrl = 'https://github.com/nalancer08/SmartButton.git'
+    libraryVersion = '1.0'
+    developerId = 'nalancer08'
+    developerName = 'Erick Sanchez Perez'
+    developerEmail = 'erick.sanchez@appbuilders.com.mx'
+    licenseName = 'MIT'
+    licenseUrl = 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+    allLicenses = ["AMIT"]
+}
+
 android {
     compileSdkVersion 27
-
-
-
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -32,3 +46,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
+
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/installv1.gradle'
+apply from: 'https://raw.githubusercontent.com/nuuneoi/JCenter/master/bintrayv1.gradle'
