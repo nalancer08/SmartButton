@@ -35,20 +35,8 @@ Example of usage in xml layout
 ```
 
 <p align="center">
-<img src="https://github.com/nalancer08/SmartButton/blob/master/Assests/xml_button.png">
+<img src="https://raw.githubusercontent.com/nalancer08/SmartButton/master/Assets/xml_button.png">
 </p>
-
-Example of usage in Java
-
-```
-SmartButton button new SmartButton(<context>);
-button.setTintColor(Color.CYAN);
-button.setBorderRadius(50);
-button.setStrokeColor(Color.GREEN);
-button.setStrokeWidth(5);
-button.setBackgroundColor(Color.RED);
-... normal button methods ...
-```
 
 Example of usage combined XML and JAVA
 
@@ -81,8 +69,20 @@ programmatically.setBackgroundColor(Color.RED);
 ```
 
 <p align="center">
-<img src="https://github.com/nalancer08/SmartButton/blob/master/Assests/hybrid_button.png">
+<img src="https://raw.githubusercontent.com/nalancer08/SmartButton/master/Assets/hybrid_button.png">
 </p>
+
+Example of usage in Java only
+
+```
+SmartButton button new SmartButton(<context>);
+button.setTintColor(Color.CYAN);
+button.setBorderRadius(50);
+button.setStrokeColor(Color.GREEN);
+button.setStrokeWidth(5);
+button.setBackgroundColor(Color.RED);
+... normal button methods ...
+```
 
 All the methods can be ommited, if you setted the background directly from xml.
 The only method that works diffrent as normal view its ```setBackgroundColor```,  so if you need to change the color only into the JAVa code, use this method.
