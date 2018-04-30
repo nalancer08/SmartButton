@@ -5,7 +5,16 @@
 # SmartButton
 SmartButton allows to have a button with a lot of personalization without external drawables
 
+## Installation
+SmartButton uses jCenter, please add the repository if you don't have it, then add the dependencie
+
+```
+compile 'com.appbuilders.smartbutton:smartbutton:1.0'
+```
+
 ## Usage
+SmartButton can be used into XML layout or JAVA.
+
 Example of usage in xml layout
 ```
     <com.appbuilders.smartbutton.SmartButton
@@ -24,6 +33,19 @@ Example of usage in xml layout
         android:drawableLeft="@drawable/fb_logo_small"
         android:drawablePadding="0dp"/>
 ```
+
+Example of usage in Java
+
+```
+SmartButton button new SmartButton(<context>);
+button.setTintColor(Color.CYAN);
+button.setBorderRadius(50);
+button.setStrokeColor(Color.GREEN);
+button.setStrokeWidth(5);
+button.setBackgroundColor(Color.RED);
+```
+All the methods can be ommited, if you setted the background directly from xml.
+The only method that works diffrent as normal view its ```setBackgroundColor```,  so if you need to change the color only into the JAVa code, use this method.
 
 To understand the properties we have 4 current properties
 
