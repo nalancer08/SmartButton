@@ -1,5 +1,6 @@
 package com.appbuilders.smartbutton;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -13,8 +14,9 @@ import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.AppCompatButton;
 import android.text.method.TransformationMethod;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.view.View;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -36,6 +38,8 @@ public class SmartButton extends AppCompatButton {
     private float mBorderRadius = 0;
     private int mStrokeColor = Color.TRANSPARENT;
     private int mStrokeWidth = 0;
+
+    private int backgroundColor = Color.TRANSPARENT;
 
     public SmartButton(Context context) {
 
@@ -70,6 +74,9 @@ public class SmartButton extends AppCompatButton {
             int drawablePadding = (int) typedArray.getDimension(R.styleable.SmartButton_android_drawablePadding, defaultDrawablePadding);
             setCompoundDrawablePadding(drawablePadding);
 
+            // -- Getting background color
+            this.backgroundColor = SmartButton.getBackgroundColor(this);
+
             // -- Update factory
             this.update();
 
@@ -86,36 +93,51 @@ public class SmartButton extends AppCompatButton {
     public void setTintColor(int tintColor) {
 
         this.tintColor = tintColor;
+        this.updateTint();
     }
 
-    public float getmBorderRadius() {
+    public float getBorderRadius() {
 
         return mBorderRadius;
     }
 
-    public void setmBorderRadius(float mBorderRadius) {
+    public void setBorderRadius(float mBorderRadius) {
 
         this.mBorderRadius = mBorderRadius;
+        this.updateBorderRadius();
     }
 
-    public int getmStrokeColor() {
+    public int getStrokeColor() {
 
         return mStrokeColor;
     }
 
-    public void setmStrokeColor(int mStrokeColor) {
+    public void setStrokeColor(int mStrokeColor) {
 
         this.mStrokeColor = mStrokeColor;
+        this.updateBorderRadius();
     }
 
-    public int getmStrokeWidth() {
+    public int getStrokeWidth() {
 
         return mStrokeWidth;
     }
 
-    public void setmStrokeWidth(int mStrokeWidth) {
+    public void setStrokeWidth(int mStrokeWidth) {
 
         this.mStrokeWidth = mStrokeWidth;
+        this.updateBorderRadius();
+    }
+
+    public int getBackgroundColor() {
+        return backgroundColor;
+    }
+
+    @Override
+    public void setBackgroundColor(int backgroundColor) {
+
+        this.backgroundColor = backgroundColor;
+        this.updateBorderRadius();
     }
 
     private void update() {
@@ -163,8 +185,8 @@ public class SmartButton extends AppCompatButton {
             gd.setShape(GradientDrawable.RECTANGLE);
 
             // Set the fill color of drawable
-            ColorDrawable color = (ColorDrawable) getBackground();
-            gd.setColor(color.getColor()); // Getting current color
+            //ColorDrawable color = (ColorDrawable) this.getBackground();
+            gd.setColor(this.backgroundColor); // Getting current color
 
             if (this.mStrokeColor != Color.TRANSPARENT && this.mStrokeWidth > 0) {
                 // Create a 2 pixels width red colored border for drawable
@@ -290,5 +312,30 @@ public class SmartButton extends AppCompatButton {
         TransformationMethod method = getTransformationMethod();
         if (method == null) return false;
         return method.getClass().getSimpleName().equals("AllCapsTransformationMethod");
+    }
+
+    @SuppressLint("ObsoleteSdkInt")
+    public static int getBackgroundColor(View view) {
+
+        Drawable drawable = view.getBackground();
+        if (drawable instanceof ColorDrawable) {
+            ColorDrawable colorDrawable = (ColorDrawable) drawable;
+            if (Build.VERSION.SDK_INT >= 11) {
+                return colorDrawable.getColor();
+            }
+            try {
+                Field field = colorDrawable.getClass().getDeclaredField("mState");
+                field.setAccessible(true);
+                Object object = field.get(colorDrawable);
+                field = object.getClass().getDeclaredField("mUseColor");
+                field.setAccessible(true);
+                return field.getInt(object);
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return 0;
     }
 }

@@ -10,7 +10,8 @@
         android:id="@+id/test"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:background="@color/fb"
         android:textColor="@color/white"
         android:text="Inicia sesion con facebook"
@@ -20,9 +21,11 @@
         app:strokeWidth="3"
         app:strokeColor="@color/colorAccent"
         android:drawableLeft="@drawable/fb_logo_small"
-        android:drawablePadding="0dp"/>
+        android:drawablePadding="0dp"
+        android:drawableStart="@drawable/fb_logo_small" />
 
     <Button
+        android:id="@+id/normal_button"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:layout_below="@id/test"
@@ -33,6 +36,22 @@
         android:textColor="@color/white"
         android:text="Inicia sesion con facebook"
         android:drawableLeft="@drawable/fb_logo_small"
-        android:drawablePadding="0dp"/>
+        android:drawablePadding="0dp"
+        android:drawableStart="@drawable/fb_logo_small" />
+
+    <com.appbuilders.smartbutton.SmartButton
+        android:id="@+id/programmatically_button"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/normal_button"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:background="@color/fb"
+        android:textColor="@color/white"
+        android:text="Inicia sesion con facebook"
+        android:textSize="12sp"
+        android:drawableLeft="@drawable/fb_logo_small"
+        android:drawablePadding="0dp"
+        android:drawableStart="@drawable/fb_logo_small" />
 
 </RelativeLayout>
